@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <% for(let i = 0; i < products.length; i++){ %>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header">
+                      <h3 style="font-family: serif;"><%= products[i].title; %></h3>
+                      <h6 style="font-family: serif;"><%= products[i].description; %></h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="images/product/<%= products[i].productimage; %>" height="150px" width="160px">
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6 text-start">
+                                <h4>RS <%= products[i].price; %>/-</h4>
+                            </div>
+                            <div class="col-6 text-end">
+                                <% if(isUserLooggedIn){ %>
+                                    <a href="/buy-product?productid=<%=products[i].id;%>" class="btn btn-primary">Buy Now</a>
+                                <% } else { %>
+                                    <a href="/log-in" class="btn btn-primary">Buy Now</a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>

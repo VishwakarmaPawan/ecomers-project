@@ -1,0 +1,180 @@
+<div>
+    <div class="mt-5 mb-3 text-end" style="margin-right: 20px;">
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new Product</a>
+    </div>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">s.nu</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">IsFetured</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < product.length; i++){ %>
+            <tr>
+              <th scope="row"><%= i + 1; %></th>
+              <td><img src="/images/product/<%= product[i].productimage; %>" height="80px" alt=""></td>
+              <td><%= product[i].title; %></td>
+              <td><%= product[i].description; %></td>
+              <td><%= product[i].price; %></td>
+              <td><%= product[i].quantity; %></td>
+              <td><%= product[i].isfetured; %></td>
+              <td>
+                <a href="/edit-product?proID=<%=product[i].id;%>" class="btn btn-primary">Edit</a>
+                <a href="/delete-product?proID=<%=product[i].id;%>" onclick="return confirm('want to delete this product!')" class="btn btn-danger">delete</a>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+</div>
+
+
+<!-- model start -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add new Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>  
+        <div class="modal-body">
+
+            <style>
+                .gradient-custom {
+            /* fallback for old browsers */
+            background: #f093fb;
+            
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+            
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+            }
+            
+            .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+            }
+            .card-registration .select-arrow {
+            top: 13px;
+            }
+            </style>
+            
+            <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-2 p-md-5">
+                      <form action="/uploadproduct" method="post" enctype="multipart/form-data">
+            
+                        <div class="row">
+                          <div class="col-md-12 ">
+            
+                            <div class="form-outline">
+                              <label class="form-label" for="firstName">Product title</label>
+                              <input type="text" name="title" required="required" id="title" class="form-control" />
+                            </div>
+            
+                          </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+              
+                              <div class="form-outline">
+                                <label class="form-label" for="firstName">Description</label>
+                                <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                              </div>
+              
+                            </div>
+                            
+                          </div>
+            
+                        <div class="row">
+                          <div class="col-md-6  d-flex align-items-center">
+            
+                            <div class="form-outline datepicker w-100">
+                              <label for="birthdayDate" class="form-label">Price</label>
+                              <input type="number" name="price" required="required" class="form-control " id="price" />
+                            </div>
+            
+                          </div>
+                          <div class="col-md-6 ">
+            
+                            <h6 class="mb-2 pb-1">Is fetured</h6>
+            
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="isfetured" id="femaleGender"
+                                value="yes" />
+                              <label class="form-check-label" for="femaleGender">Yes</label>
+                            </div>
+            
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="isfetured" id="maleGender"
+                                value="no" />
+                              <label class="form-check-label" for="maleGender">No</label>
+                            </div>
+            
+                          </div>
+                        </div>
+            
+                        <div class="row">
+                          <div class="col-md-6  pb-2">
+            
+                            <div class="form-outline">
+                              <label class="form-label" for="emailAddress">Quantity</label>
+                              <input type="number" name="quantity" required="required" id="quantity" class="form-control" />
+                            </div>
+            
+                          </div>
+        
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+              
+                              <div class="form-outline">
+                                <label class="form-label" for="emailAddress">Product Image</label>
+                                <input type="file" name="productimage" required="required" id="productimage" class="form-control" />
+                              </div>
+              
+                            </div>
+          
+                          </div>
+            
+                        <div class="mt-4 pt-2 text-center">
+                          <input class="btn btn-primary" type="submit" value="Submit" />
+                        </div>
+            
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </section>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- model end -->

@@ -1,0 +1,129 @@
+<style>
+    .gradient-custom {
+/* fallback for old browsers */
+background: #f093fb;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+font-size: 1rem;
+line-height: 2.15;
+padding-left: .75em;
+padding-right: .75em;
+}
+.card-registration .select-arrow {
+top: 13px;
+}
+</style>
+
+<section class="vh-100 gradient-custom">
+<div class="container py-5 h-100">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-12 col-lg-9 col-xl-7">
+      <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+        <div class="card-body p-2 p-md-5">
+          <div class="text-center" style="border: none;border-bottom: 2px solid black;">
+            <h4 style="font-family: serif;font-weight: bold;">Edit Product : <%= prodata.title; %></h4>
+          </div>
+          <form action="/updateproduct" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+              <div class="col-md-12 ">
+
+                <div class="form-outline">
+                  <label class="form-label" for="firstName">Product title</label>
+                  <input type="text" name="title" required="required" id="title" value="<%=prodata.title;%>" class="form-control" />
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 ">
+  
+                  <div class="form-outline">
+                    <label class="form-label" for="firstName">Description</label>
+                    <textarea name="description" id="description" class="form-control" rows="5"><%= prodata.description; %></textarea>
+                  </div>
+  
+                </div>
+                
+              </div>
+
+            <div class="row">
+              <div class="col-md-6  d-flex align-items-center">
+
+                <div class="form-outline datepicker w-100">
+                  <label for="birthdayDate" class="form-label">Price</label>
+                  <input type="number" name="price" required="required" class="form-control" value="<%=prodata.price;%>" id="price" />
+                </div>
+
+              </div>
+              <div class="col-md-6 ">
+
+                <h6 class="mb-2 pb-1">Is fetured</h6>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="isfetured" id="femaleGender"
+                    value="yes" <%if(prodata.isfetured=='yes'){%> checked=checked <%}else{}%> />
+                  <label class="form-check-label" for="femaleGender">Yes</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="isfetured" id="maleGender"
+                    value="no" <%if(prodata.isfetured=='no'){%> checked=checked <%}else{}%>/>
+                  <label class="form-check-label" for="maleGender">No</label>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6  pb-2">
+
+                <div class="form-outline">
+                  <label class="form-label" for="emailAddress">Quantity</label>
+                  <input type="number" name="quantity" required="required" id="quantity" value="<%=prodata.quantity;%>" class="form-control" />
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+  
+                  <div class="form-outline">
+                    <label class="form-label" for="emailAddress">Product Image</label>
+                    <input type="file" name="productimage" required="required" id="productimage" class="form-control" />
+                  </div>
+  
+                </div>
+                <div class="col-md-6">
+  
+                  <div class="form-outline">
+                    <img src="/images/product/<%=prodata.productimage;%>" height="100px" alt="">
+                  </div>
+  
+                </div>
+
+              </div>
+
+            <div class="mt-4 pt-2 text-center">
+              <input type="hidden" name="proID" value="<%=prodata.id;%>">
+              <input class="btn btn-primary" type="submit" value="Submit" />
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
